@@ -61,8 +61,8 @@
     },
     {
       "name": "change-case",
-      "title": "Change string case",
-      "description": "Change string case",
+      "title": "Change str case",
+      "description": "Change str case",
       "mode": "view",
       "arguments": [
         {

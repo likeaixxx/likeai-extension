@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { ActionPanel, Action, Detail, LaunchProps, List, getSelectedText } from "@raycast/api";
+import { Action, ActionPanel, LaunchProps, List, getSelectedText } from "@raycast/api";
+import { useEffect, useState } from "react";
 import { EasydictArguments } from "./Arguments";
 
 export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
