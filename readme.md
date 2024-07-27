@@ -1,3 +1,2 @@
-# Likeai Extension Changelog
-
-## [Initial Version] - 2024-07-03
+# likeai-extension
+useless raycast extension
