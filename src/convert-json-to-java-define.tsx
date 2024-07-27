@@ -1,11 +1,10 @@
-import { ActionPanel, Action, Icon, List, Detail, LaunchProps, getSelectedText } from "@raycast/api";
-import { EasydictArguments, toTitleCase } from "./Arguments";
-import { useState, useEffect } from "react";
+import { Action, ActionPanel, Detail, LaunchProps, getSelectedText } from "@raycast/api";
 import { camelCase } from "change-case";
+import { useEffect, useState } from "react";
+import { EasydictArguments } from "./Arguments";
 
 export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
-  let className = props.arguments.queryText || "";
-
+  const className: string = props.arguments.queryText || "";
   const [data, setData] = useState(["", ""]),
     [loading, setLoading] = useState(true),
     [formated, setFormated] = useState(false);

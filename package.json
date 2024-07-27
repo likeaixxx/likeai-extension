@@ -46,7 +46,7 @@
       ]
     },
     {
-      "name": "convertJsonToJavaDefine",
+      "name": "convert-json-to-java-define",
       "title": "Convert json to java definition",
       "description": "Convert json to java definition",
       "mode": "view",
@@ -74,20 +74,20 @@
       ]
     },
     {
-      "name": "jsonFormat",
+      "name": "json-format",
       "title": "Format json",
       "description": "Format json and flattening json",
       "mode": "view"
     },
     {
-      "name": "mockJson",
+      "name": "mock-json",
       "title": "Convert JAVA class definition into mock json",
       "description": "Convert JAVA class definition into mock json",
       "mode": "view"
     },
     {
       "name": "hitokoto",
-      "title": "-",
+      "title": "Hitokoto",
       "description": "Hitokoto api",
       "mode": "no-view",
       "interval": "10m",
@@ -95,7 +95,7 @@
     },
     {
       "name": "chicken-soup",
-      "title": "-",
+      "title": "Day Day Up",
       "description": "Soul Poisonous Chicken Soup",
       "mode": "no-view",
       "interval": "30m",
