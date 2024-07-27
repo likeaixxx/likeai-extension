@@ -44,8 +44,7 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
 }
 
 async function convert(className: string): Promise<string[]> {
-  let selected = await getSelectedText();
-
+  const selected = await getSelectedText();
   return new Promise((resolve, reject) => {
     try {
       let de = javaClassDefinition(JSON.parse(selected), className);
@@ -57,24 +56,22 @@ async function convert(className: string): Promise<string[]> {
   });
 }
 
-function javaClassDefinition(json: {}, className = "Mock", isStatic = false): string[] {
+function javaClassDefinition(json: unknown, className = "Mock", isStatic = false): string[] {
   let classDefinition = `@Getter\n@Setter\npublic ${isStatic ? "static " : ""}class ${className || "Mock"} {\n`;
 
-  let properties = generateJavaClassDefinition(json);
-
+  const properties = generateJavaClassDefinition(json);
   classDefinition += properties + "}\n";
-
   return [properties, classDefinition];
 }
 
-function generateJavaClassDefinition(json: any): string {
+function generateJavaClassDefinition(json: unknown): string {
   let properties = "";
-  let l = [];
-  let o = [];
+  const l: string[] = [];
+  const o: string[] = [];
 
-  for (let key in json) {
+  for (const key in json) {
     if (json.hasOwnProperty(key)) {
-      let dataType = typeof json[key];
+      const dataType = typeof json[key];
       let javaType = "";
 
       switch (dataType) {
@@ -105,15 +102,15 @@ function generateJavaClassDefinition(json: any): string {
   for (let i = 0; i < l.length; i++) {
     // 检查是否存在至少一个对象
     if (Array.isArray(json[l[i]]) && json[l[i]].length > 0) {
-      let key = l[i].charAt(0).toUpperCase() + l[i].slice(1);
-      let inner = `${javaClassDefinition(json[l[i]][0], key, true)[1]}`;
+      const key = l[i].charAt(0).toUpperCase() + l[i].slice(1);
+      const inner = `${javaClassDefinition(json[l[i]][0], key, true)[1]}`;
       properties += inner;
     }
   }
 
   for (let i = 0; i < o.length; i++) {
-    let key = o[i].charAt(0).toUpperCase() + o[i].slice(1);
-    let inner = `${javaClassDefinition(json[o[i]], key, true)[1]}`;
+    const key = o[i].charAt(0).toUpperCase() + o[i].slice(1);
+    const inner = `${javaClassDefinition(json[o[i]], key, true)[1]}`;
     properties += inner;
   }
   return properties;

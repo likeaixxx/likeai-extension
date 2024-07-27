@@ -1,4 +1,4 @@
-import { ActionPanel, Action, Detail, LaunchProps, getSelectedText } from "@raycast/api";
+import { Action, ActionPanel, Detail, getSelectedText } from "@raycast/api";
 import { useEffect, useState } from "react";
 
 export default function () {

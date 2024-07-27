@@ -1,8 +1,8 @@
 import { Action, ActionPanel, Detail, getSelectedText } from "@raycast/api";
 import { useEffect, useState } from "react";
 
-async function model2Json(): Promise<any> {
-  let classDefinition = await getSelectedText();
+async function model2Json(): Promise<string> {
+  const classDefinition = await getSelectedText();
   return new Promise((resolve, reject) => {
     try {
       const fieldRegex = /\b(private|public|protected)\s+(\S+(\s*<\s*\w+\s*>)?)\s+(\w+)\s*(?:=.*?)?;/g;
@@ -10,7 +10,7 @@ async function model2Json(): Promise<any> {
       const fields: Map<string, string> = new Map();
       while ((match = fieldRegex.exec(classDefinition)) !== null) {
         console.log("match + " + match);
-        let type = match[match.length - 3];
+        const type = match[match.length - 3];
         const fieldName = match[match.length - 1];
         fields.set(fieldName, type);
       }
@@ -30,7 +30,7 @@ export default function () {
 
   useEffect(() => {
     model2Json()
-      .then((h: any) => {
+      .then((h: string) => {
         setData(h);
         setLoading(false);
         setFormated(true);
@@ -49,8 +49,8 @@ export default function () {
         !loading &&
         formated && (
           <ActionPanel>
-            <Action.CopyToClipboard content={JSON.stringify(data, null, 2)} title="Copy formated json" />
-            <Action.CopyToClipboard content={JSON.stringify(data, null, 0)} title="Copy json" />
+            <Action.CopyToClipboard content={JSON.stringify(data, null, 2)} title="Copy Formated Json" />
+            <Action.CopyToClipboard content={JSON.stringify(data, null, 0)} title="Copy Json" />
           </ActionPanel>
         )
       }

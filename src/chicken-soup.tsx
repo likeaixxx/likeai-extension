@@ -7,14 +7,14 @@ export default async function Command() {
     await LocalStorage.setItem("chicken-soup", JSON.stringify(data));
     await updateCommandMetadata({ subtitle: `${data.content}` });
   } else {
-    let storeage = await LocalStorage.getItem<any>("chicken-soup");
+    const storeage = await LocalStorage.getItem<string>("chicken-soup");
     if (!storeage) {
       const data = await getData();
       await LocalStorage.setItem("chicken-soup", JSON.stringify(data));
       await updateCommandMetadata({ subtitle: `${data.content}` });
       return;
     }
-    let data = JSON.parse(storeage);
+    const data = JSON.parse(storeage);
     open(
       encodeURI(
         `raycast://extensions/like-ai/likeai-extension/show-markdown?arguments={"queryText":"${data.content}", "sub":"${data.note}"}`,
@@ -32,15 +32,15 @@ function getData(): any {
     },
   })
     .then((response) => response.json())
-    .then((data: any) => {
+    .then((data: unknown) => {
       return data;
     })
-    .catch((error) => {
+    .catch(() => {
       return getData();
     });
 }
 
-function getRandomDay() {
+function getRandomDay(): Date {
   // 获取当前日期
   const currentDate = new Date();
   // 生成随机年份（2000年至今）
@@ -55,7 +55,7 @@ function getRandomDay() {
   return randomDate;
 }
 
-function formatDate(date: any) {
+function formatDate(date: Date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");

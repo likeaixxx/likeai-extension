@@ -7,7 +7,7 @@ const parser = new Parser("mysql");
 
 export default function () {
   const [schema, setSchema] = useState("");
-  let [model, setModel] = useState("");
+  const [model, setModel] = useState("");
 
   useEffect(() => {
     async function loadSelectedText() {
@@ -20,7 +20,7 @@ export default function () {
         setSchema("# Must Select DDL Context");
         setModel("# Must Select DDL Context");
       } else {
-        let schema = main(selectedText);
+        const schema = main(selectedText);
         setSchema(schema);
         setModel(read(schema));
       }
@@ -70,13 +70,10 @@ function main(ddl: string): string {
 
 function read(json: string): string {
   console.log(json);
-
-  let schema = JSON.parse(json)[0];
+  const schema = JSON.parse(json)[0];
   console.log(schema);
-
   let code = `/**\n*${schema.description}\n*@author likeai\n**/\npublic class ${toTitleCase(schema.title)}{\n`;
-
-  let map = new Map();
+  const map = new Map();
   for (const [k, v] of Object.entries(schema.definitions)) {
     map.set(k, v);
   }
@@ -91,15 +88,15 @@ function read(json: string): string {
 function readProperty(property: string, option: any) {
   console.log(property, option);
 
-  let map = new Map();
+  const map = new Map();
   for (const [k, v] of Object.entries(option)) {
     map.set(k, v);
   }
-  let description = map.get("description");
-  let type = map.get("type");
-  let maximum = map.get("maximum");
-  let format = map.get("format");
-  let toDefault = map.get("default");
+  const description = map.get("description");
+  const type = map.get("type");
+  const maximum = map.get("maximum");
+  const format = map.get("format");
+  const toDefault = map.get("default");
 
   let code = "";
   if (description !== undefined) {
@@ -120,7 +117,7 @@ function mapType(type: string, maximum: number, format: string, toDefault: strin
     return dataTypeMap["TIME"];
   }
   if (type === "integer") {
-    if (maximum > 1208925819614629174706176) {
+    if (maximum > 1208925819614629174706176n) {
       return dataTypeMap["BIGINT"];
     }
     return dataTypeMap["INT"];

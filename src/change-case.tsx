@@ -12,7 +12,9 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
         let selectedText = "";
         try {
           selectedText = await getSelectedText();
-        } catch (ignore) {}
+        } catch (ignore) {
+          // pass
+        }
         setText(selectedText);
       }
     }
@@ -49,7 +51,7 @@ function caseTo(text: string): Map<string, string> {
   let map = new Map();
   map.set(
     "config constant",
-    `private static final String ${changeCase.constantCase(text)} = "${changeCase.dotCase(text)}";`
+    `private static final String ${changeCase.constantCase(text)} = "${changeCase.dotCase(text)}";`,
   );
   map.set("camel", changeCase.camelCase(text));
   map.set("snake", changeCase.snakeCase(text));
