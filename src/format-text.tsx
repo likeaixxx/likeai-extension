@@ -38,10 +38,6 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
       });
   }
 
-  async function getSelected() {
-    return await getSelectedText();
-  }
-
   return (
     <List searchText={searchText} onSearchTextChange={onInputChange} searchBarPlaceholder={"text source..."}>
       {data.map((d) => {
@@ -76,9 +72,12 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
   }
 
   function withComma(source: string) {
+    const lte: string[] = source.split(/\s+/);
+    if (lte.length > 0 && lte.length < 2) {
+      return source;
+    }
     let res = "";
-    console.log(source.split(/\s+/));
-    for (let t of source.split(/\s+/)) {
+    for (const t of lte) {
       res += `${t.trim()},`;
     }
     res = res.replaceAll("''", "").replaceAll(",,", "");
@@ -86,8 +85,12 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
   }
 
   function withCommaSingleQuotes(source: string): string {
+    let lte: string[] = source.split(/\s+/);
+    if (lte.length > 0 && lte.length < 2) {
+      lte = source.split(",");
+    }
     let res = "";
-    for (let t of source.split(/\s+/)) {
+    for (const t of lte) {
       res += `'${t.trim()}',`;
     }
     return res.substring(0, res.length - 1);
