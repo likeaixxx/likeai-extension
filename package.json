@@ -75,7 +75,7 @@
     },
     {
       "name": "json-format",
-      "title": "Format json",
+      "title": "Format Json",
       "description": "Format json and flattening json",
       "mode": "view"
     },
