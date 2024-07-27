@@ -1,0 +1,181 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "likeai-extension",
+  "title": "Likeai Extension",
+  "description": "Be Best Likeai Extension",
+  "icon": "g.png",
+  "author": "likeai--",
+  "owner": "like-ai",
+  "categories": [
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "time-utils",
+      "title": "Convertor Time",
+      "description": "Convertor Time",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "Query",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "convert-ddl2-java",
+      "title": "Convert ddl to java model",
+      "description": "Convert ddl to java model",
+      "mode": "view"
+    },
+    {
+      "name": "format-text",
+      "title": "Format Text",
+      "description": "Format Text To Custom",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "text source...",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "convertJsonToJavaDefine",
+      "title": "Convert json to java definition",
+      "description": "Convert json to java definition",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "class name... default Mock",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "change-case",
+      "title": "Change string case",
+      "description": "Change string case",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "source string...",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "jsonFormat",
+      "title": "Format json",
+      "description": "Format json and flattening json",
+      "mode": "view"
+    },
+    {
+      "name": "mockJson",
+      "title": "Convert JAVA class definition into mock json",
+      "description": "Convert JAVA class definition into mock json",
+      "mode": "view"
+    },
+    {
+      "name": "hitokoto",
+      "title": "-",
+      "description": "Hitokoto api",
+      "mode": "no-view",
+      "interval": "10m",
+      "icon": "h.png"
+    },
+    {
+      "name": "chicken-soup",
+      "title": "-",
+      "description": "Soul Poisonous Chicken Soup",
+      "mode": "no-view",
+      "interval": "30m",
+      "icon": "d.png"
+    },
+    {
+      "name": "show-markdown",
+      "title": "Just Show Query Markdown",
+      "description": "Just Show Query Markdown",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "TITLE",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "sub",
+          "placeholder": "SUB TITLE",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "show-img",
+      "title": "Just Show Img With Markdown",
+      "description": "Just Show Img With Markdown",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "TITLE",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "sub",
+          "placeholder": "SUB TITLE",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "ext",
+          "placeholder": "EXT",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "snake-case-json",
+      "title": "Snake Case Json Key",
+      "description": "Snake Case Json Key",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.77.3",
+    "node-fetch": "^3.3.1",
+    "sql-ddl-to-json-schema": "^4.0.9",
+    "sql-parser": "^0.5.0",
+    "change-case": "^4.1.2",
+    "dayjs": "^1.11.8"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.8",
+    "@types/node": "20.8.10",
+    "@types/react": "18.3.3",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
