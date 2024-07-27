@@ -77,25 +77,19 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
 
   function withComma(source: string) {
     let res = "";
-
-    console.log(source.split(" "));
-
-    for (let t of source.split(" ")) {
+    console.log(source.split(/\s+/));
+    for (let t of source.split(/\s+/)) {
       res += `${t.trim()},`;
     }
-
+    res = res.replaceAll("''", "").replaceAll(",,", "");
     return res.substring(0, res.length - 1);
   }
 
   function withCommaSingleQuotes(source: string): string {
     let res = "";
-
-    console.log(source.split(" "));
-
-    for (let t of source.split(" ")) {
+    for (let t of source.split(/\s+/)) {
       res += `'${t.trim()}',`;
     }
-
     return res.substring(0, res.length - 1);
   }
 }
