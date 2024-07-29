@@ -152,6 +152,12 @@
       "title": "Snake Case Json Key",
       "description": "Snake Case Json Key",
       "mode": "view"
+    },
+    {
+      "name": "translate",
+      "title": "Translate",
+      "description": "Translate Selected Text",
+      "mode": "no-view"
     }
   ],
   "dependencies": {
