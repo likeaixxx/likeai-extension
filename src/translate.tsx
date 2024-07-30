@@ -4,7 +4,6 @@ export default async function () {
   let text: string = "";
   try {
     text = await getSelectedText();
-    console.log(text);
   } catch (e) {
     // pass
   }

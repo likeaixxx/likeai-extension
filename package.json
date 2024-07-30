@@ -158,15 +158,22 @@
       "title": "Translate",
       "description": "Translate Selected Text",
       "mode": "no-view"
+    },
+    {
+      "name": "ocr-translate",
+      "title": "Ocr Translate",
+      "description": "Translate Ocr Text",
+      "mode": "no-view"
     }
   ],
   "dependencies": {
     "@raycast/api": "^1.77.3",
+    "change-case": "^4.1.2",
+    "dayjs": "^1.11.8",
+    "execa": "^9.3.0",
     "node-fetch": "^3.3.1",
     "sql-ddl-to-json-schema": "^4.0.9",
-    "sql-parser": "^0.5.0",
-    "change-case": "^4.1.2",
-    "dayjs": "^1.11.8"
+    "sql-parser": "^0.5.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^1.0.8",
