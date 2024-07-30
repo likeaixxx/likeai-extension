@@ -1,5 +1,12 @@
 import { getSelectedText, open } from "@raycast/api";
 
 export default async function () {
-  open(`raycast://extensions/raycast/translator/translate?fallbackText=${(await getSelectedText()) || ""}`);
+  let text: string = "";
+  try {
+    text = await getSelectedText();
+    console.log(text);
+  } catch (e) {
+    // pass
+  }
+  open(`raycast://extensions/raycast/translator/translate?fallbackText=${encodeURIComponent(text)}`);
 }
