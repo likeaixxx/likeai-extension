@@ -7,11 +7,33 @@ import { useEffect, useState } from "react";
 dayjs.extend(utc);
 
 // 时间字符串转 -- utc 时区时间戳
-function dateToTimestamp(dateString: string) {
-  const [year, month, day, hours, minutes, seconds] = dateString.split(/[- :]/);
-  return new Date(
-    Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hours), parseInt(minutes), parseInt(seconds)),
-  ).getTime();
+function dateToTimestamp(dateString: string): number {
+  // 分割日期和时间
+  const [datePart, timePart] = dateString.split(" ");
+  const [year, month, day] = datePart.split("-");
+  const [time, fraction] = timePart.split(".");
+
+  const [hours, minutes, seconds] = time.split(":");
+
+  // 创建基础时间戳（秒级）
+  const baseTimestamp = Date.UTC(
+    parseInt(year),
+    parseInt(month) - 1,
+    parseInt(day),
+    parseInt(hours),
+    parseInt(minutes),
+    parseInt(seconds),
+  );
+
+  // 处理毫秒及更精确的部分
+  let fractionInMilliseconds = 0;
+  if (fraction) {
+    // 将小数部分转换为毫秒
+    fractionInMilliseconds = parseFloat(`0.${fraction}`) * 1000;
+  }
+
+  // 合并基础时间戳和毫秒部分
+  return baseTimestamp + fractionInMilliseconds;
 }
 
 function timestampToDate(timestamp: number, timezoneOffset: string) {
@@ -19,7 +41,11 @@ function timestampToDate(timestamp: number, timezoneOffset: string) {
   const offsetHrs = Math.abs(Math.floor(offset));
   const offsetMins = Math.abs((offset - offsetHrs) * 60);
 
-  const localTime = new Date(timestamp).toLocaleString("en-US", {
+  // 创建 Date 对象，保留毫秒
+  const date = new Date(timestamp);
+
+  // 格式化年月日时分秒
+  const formattedDate = date.toLocaleString("en-US", {
     timeZone: "UTC",
     year: "numeric",
     month: "2-digit",
@@ -30,32 +56,27 @@ function timestampToDate(timestamp: number, timezoneOffset: string) {
     hour12: false,
   });
 
-  const localTimeParts = localTime.split(", ");
-  const dateParts = localTimeParts[0].split("/");
-  const timeParts = localTimeParts[1].split(":");
+  // 获取毫秒
+  const milliseconds = date.getUTCMilliseconds().toString().padStart(3, "0");
+  const [datePart, timePart] = formattedDate.split(", ");
+  const [month, day, year] = datePart.split("/");
+  const [hours, minutes, seconds] = timePart.split(":");
 
+  // 应用时区偏移
   const shiftedTime = new Date(
     Date.UTC(
-      parseInt(dateParts[2]),
-      parseInt(dateParts[0]) - 1,
-      parseInt(dateParts[1]),
-      parseInt(timeParts[0]) + offsetHrs,
-      parseInt(timeParts[1]) + offsetMins,
-      parseInt(timeParts[2]),
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day),
+      parseInt(hours) + offsetHrs,
+      parseInt(minutes) + offsetMins,
+      parseInt(seconds),
+      parseInt(milliseconds),
     ),
   );
 
-  const shiftedDate = `${shiftedTime.getUTCFullYear()}-${String(shiftedTime.getUTCMonth() + 1).padStart(
-    2,
-    "0",
-  )}-${String(shiftedTime.getUTCDate()).padStart(2, "0")}`;
-  const shiftedTimeStr = `${String(shiftedTime.getUTCHours()).padStart(2, "0")}:${String(
-    shiftedTime.getUTCMinutes(),
-  ).padStart(2, "0")}:${String(shiftedTime.getUTCSeconds()).padStart(2, "0")}`;
-
-  // let offsetSte = `GMT${offsetSign}${String(offsetHrs).padStart(2, '0')}:${String(offsetMins).padStart(2, '0')}`
-
-  return `${shiftedDate} ${shiftedTimeStr} `;
+  // 格式化最终结果
+  return `${shiftedTime.getUTCFullYear()}-${String(shiftedTime.getUTCMonth() + 1).padStart(2, "0")}-${String(shiftedTime.getUTCDate()).padStart(2, "0")} ${String(shiftedTime.getUTCHours()).padStart(2, "0")}:${String(shiftedTime.getUTCMinutes()).padStart(2, "0")}:${String(shiftedTime.getUTCSeconds()).padStart(2, "0")}.${milliseconds}`;
 }
 
 function Parse(props: { time: string }) {
@@ -102,16 +123,16 @@ function convertTimestamp(time: number): JSX.Element[] {
   console.log(`timestamp ${time} `);
 
   // 转换成时间戳
-  let utc = timestampToDate(time, "+0");
-  let uto8 = timestampToDate(time, "+8");
-  let uto7 = timestampToDate(time, "+7");
-  let uto6 = timestampToDate(time, "+6");
-  let uto5 = timestampToDate(time, "+5");
-  let uto4 = timestampToDate(time, "+4");
-  let uto3 = timestampToDate(time, "+3");
-  let uto2 = timestampToDate(time, "+2");
-  let uto1 = timestampToDate(time, "+1");
-  let res = [LinklistItem({ title: "timestamp", link: String(time) })];
+  const utc = timestampToDate(time, "+0");
+  const uto8 = timestampToDate(time, "+8");
+  const uto7 = timestampToDate(time, "+7");
+  const uto6 = timestampToDate(time, "+6");
+  const uto5 = timestampToDate(time, "+5");
+  const uto4 = timestampToDate(time, "+4");
+  const uto3 = timestampToDate(time, "+3");
+  const uto2 = timestampToDate(time, "+2");
+  const uto1 = timestampToDate(time, "+1");
+  const res = [LinklistItem({ title: "timestamp", link: String(time) })];
   res.push(LinklistItem({ title: "UTC", link: utc }));
   res.push(LinklistItem({ title: "+8", link: uto8 }));
   res.push(LinklistItem({ title: "+7", link: uto7 }));
