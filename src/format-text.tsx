@@ -48,6 +48,7 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
             detail={<List.Item.Detail markdown={d} />}
             actions={
               <ActionPanel>
+                <Action.Paste content={d} />
                 <Action.CopyToClipboard title="Copy" content={d} />
               </ActionPanel>
             }

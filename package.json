@@ -61,8 +61,8 @@
     },
     {
       "name": "change-case",
-      "title": "Change str case",
-      "description": "Change str case",
+      "title": "Change selected text case",
+      "description": "Change selected text case",
       "mode": "view",
       "arguments": [
         {
@@ -92,14 +92,6 @@
       "mode": "no-view",
       "interval": "10m",
       "icon": "h.png"
-    },
-    {
-      "name": "chicken-soup",
-      "title": "Day Day Up",
-      "description": "Soul Poisonous Chicken Soup",
-      "mode": "no-view",
-      "interval": "30m",
-      "icon": "d.png"
     },
     {
       "name": "show-markdown",
@@ -154,15 +146,15 @@
       "mode": "view"
     },
     {
-      "name": "translate",
-      "title": "Translate",
-      "description": "Translate Selected Text",
-      "mode": "no-view"
-    },
-    {
       "name": "ocr-translate",
       "title": "Ocr Translate",
       "description": "Translate Ocr Text",
+      "mode": "no-view"
+    },
+    {
+      "name": "translate-select",
+      "title": "Translate Selected",
+      "description": "Translate Selected Text",
       "mode": "no-view"
     }
   ],

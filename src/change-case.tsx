@@ -37,6 +37,7 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
             icon={Icon.Circle}
             actions={
               <ActionPanel>
+                <Action.Paste content={to[1]} />
                 <Action.CopyToClipboard title="Copy" content={to[1]} />
               </ActionPanel>
             }

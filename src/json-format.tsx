@@ -3,13 +3,18 @@ import { useEffect, useState } from "react";
 
 export default function () {
   const [data, setData] = useState("");
+  const [formatedData, setFormatedData] = useState("");
+  const [flatData, setFlatData] = useState("");
   const [loading, setLoading] = useState(true);
   const [formated, setFormated] = useState(false);
 
   useEffect(() => {
-    formatAsync()
-      .then((h) => {
-        setData(h);
+    getSelectedText()
+      .then((json) => {
+        const data = JSON.parse(json);
+        setData(data);
+        setFormatedData(JSON.stringify(data, null, "  "));
+        setFlatData(JSON.stringify(data, null, 0));
         setLoading(false);
         setFormated(true);
       })
@@ -22,27 +27,17 @@ export default function () {
   return (
     <Detail
       isLoading={loading}
-      markdown={(formated && "```json\n" + JSON.stringify(data, null, "\t")) || `## ${data}`}
+      markdown={(formated && "```json\n" + formatedData) || `## ${data}`}
       actions={
         !loading &&
         formated && (
           <ActionPanel>
-            <Action.CopyToClipboard content={JSON.stringify(data, null, "\t")} title="Copy Formated Json" />
-            <Action.CopyToClipboard content={JSON.stringify(data, null, 0)} title="Copy Json" />
+            <Action.Paste content={formatedData} />
+            <Action.CopyToClipboard content={formatedData} title="Copy Formated Json" />
+            <Action.CopyToClipboard content={flatData} title="Copy Json" />
           </ActionPanel>
         )
       }
     />
   );
-}
-
-async function formatAsync(): Promise<string> {
-  const json: string = await getSelectedText();
-  return new Promise((resolve, reject) => {
-    try {
-      resolve(JSON.parse(json));
-    } catch (error) {
-      reject(error);
-    }
-  });
 }

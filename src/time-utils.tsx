@@ -177,7 +177,9 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
   useEffect(() => {
     async function loadSelectedText() {
       if (!props.arguments.queryText) {
-        setText(await getSelectedText());
+        const arg = await getSelectedText();
+        props.arguments.queryText = arg;
+        setText(arg);
       }
     }
     loadSelectedText();

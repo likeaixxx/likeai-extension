@@ -27,6 +27,7 @@ export default function () {
         !loading &&
         formated && (
           <ActionPanel>
+            <Action.Paste content={data} />
             <Action.CopyToClipboard content={data} title="Copy Formated Json" />
           </ActionPanel>
         )
