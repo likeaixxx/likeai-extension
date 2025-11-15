@@ -17,7 +17,6 @@ function javaClassToMockJson(javaClassString: string): string {
       return JSON.stringify({ error: "No class definition found" });
     }
 
-    const className = classMatch[1];
     const classBody = classMatch[2];
 
     // Extract fields directly from the class body
@@ -46,11 +45,6 @@ function javaClassToMockJson(javaClassString: string): string {
  */
 function extractClassFields(classBody: string): Array<{ name: string; type: string; comment: string }> {
   const fields: Array<{ name: string; type: string; comment: string }> = [];
-
-  // Track brace levels to identify method bodies
-  let braceLevel = 1; // Start at 1 because we're already inside the class braces
-  let inMethod = false;
-  let currentPos = 0;
 
   // First pass: mark method boundaries
   const methodBoundaries: Array<{ start: number; end: number }> = [];

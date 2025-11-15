@@ -10,6 +10,16 @@
     "Developer Tools"
   ],
   "license": "MIT",
+  "preferences": [
+    {
+      "name": "lyrics_api",
+      "title": "Lyrics Api Endpoint",
+      "description": "Lyrics Api Endpoint",
+      "placeholder": "http://127.0.0.1:8331",
+      "type": "textfield",
+      "required": false
+    }
+  ],
   "commands": [
     {
       "name": "time-utils",
@@ -87,10 +97,10 @@
     },
     {
       "name": "hitokoto",
-      "title": "Hitokoto",
-      "description": "Hitokoto api",
+      "title": "一言 ·",
+      "description": "hitokoto · 一言",
       "mode": "no-view",
-      "interval": "10m",
+      "interval": "24h",
       "icon": "h.png"
     },
     {
@@ -156,10 +166,42 @@
       "title": "Translate Selected",
       "description": "Translate Selected Text",
       "mode": "no-view"
+    },
+    {
+      "name": "recent-extesion",
+      "title": "Store Recent Extesion",
+      "description": "Recent Extesion From Raycast Store",
+      "mode": "view"
+    },
+    {
+      "name": "findLyrics",
+      "title": "Find Lyrics",
+      "subtitle": "Lyrics Api",
+      "description": "Find and display lyrics for the currently playing song.",
+      "mode": "view",
+      "icon": "spotify.png",
+      "arguments": [
+        {
+          "name": "refresh",
+          "data": [
+            {
+              "title": "True",
+              "value": "true"
+            },
+            {
+              "title": "False",
+              "value": "false"
+            }
+          ],
+          "type": "dropdown",
+          "placeholder": "Refresh"
+        }
+      ]
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.77.3",
+    "@raycast/api": "^1.90.0",
+    "@raycast/utils": "^1.17.0",
     "change-case": "^4.1.2",
     "dayjs": "^1.11.8",
     "execa": "^9.3.0",
@@ -170,7 +212,7 @@
   "devDependencies": {
     "@raycast/eslint-config": "^1.0.8",
     "@types/node": "20.8.10",
-    "@types/react": "18.3.3",
+    "@types/react": "18.2.0",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"

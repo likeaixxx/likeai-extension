@@ -2,7 +2,7 @@ import { Action, ActionPanel, Detail, Icon, List, getSelectedText } from "@rayca
 import * as changeCase from "change-case";
 import { useEffect, useState } from "react";
 import { Parser } from "sql-ddl-to-json-schema";
-import { toTitleCase } from "./Arguments";
+import { toTitleCase } from "./Args";
 const parser = new Parser("mysql");
 
 export default function () {
@@ -14,7 +14,9 @@ export default function () {
       let selectedText = "";
       try {
         selectedText = await getSelectedText();
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
       console.log(selectedText);
       if (selectedText == "") {
         setSchema("# Must Select DDL Context");
@@ -85,7 +87,7 @@ function read(json: string): string {
   return code;
 }
 
-function readProperty(property: string, option: any) {
+function readProperty(property: string, option: string) {
   console.log(property, option);
 
   const map = new Map();
@@ -129,6 +131,7 @@ function mapType(type: string, maximum: number, format: string, toDefault: strin
     return dataTypeMap["DECIMAL"];
   }
   console.log(type);
+  return dataTypeMap["VARCHAR"];
 }
 
 const dataTypeMap: { [key: string]: string } = {

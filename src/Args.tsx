@@ -1,12 +1,11 @@
 import * as changeCase from 'change-case';
 
-export interface EasydictArguments {
+export interface Args {
   queryText?: string;
   sub?: string
   ext?: string
-  r18?:boolean
+  r18?: boolean
 }
-
 
 export function toTitleCase(input: string): string {
   input = changeCase.camelCase(input)

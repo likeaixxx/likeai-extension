@@ -1,14 +1,16 @@
 import { Action, ActionPanel, Detail, LaunchProps } from "@raycast/api";
-import { EasydictArguments } from "./Arguments";
+import { Args } from "./Args";
 
-export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
+export default function (props: LaunchProps<{ arguments: Args }>) {
+  const t1 = decodeURIComponent(props.arguments.queryText);
+  const t2 = decodeURIComponent(props.arguments.sub);
   return (
     <Detail
-      markdown={`## ${props.arguments.queryText}\n #### ${props.arguments.sub || ""}`}
+      markdown={`## ${t1}\n #### ${t2 || ""}`}
       actions={
         <ActionPanel>
-          <Action.CopyToClipboard content={props.arguments.queryText || ""} title="Copy Query Text" />
-          <Action.CopyToClipboard content={props.arguments.sub || ""} title="Copy Sub Text" />
+          <Action.CopyToClipboard content={t1 || ""} title="Copy Query Text" />
+          <Action.CopyToClipboard content={t2 || ""} title="Copy Sub Text" />
         </ActionPanel>
       }
     />

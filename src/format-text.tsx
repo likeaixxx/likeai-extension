@@ -1,8 +1,8 @@
 import { Action, ActionPanel, LaunchProps, List, getSelectedText } from "@raycast/api";
 import { useEffect, useState } from "react";
-import { EasydictArguments } from "./Arguments";
+import { Args } from "./Args";
 
-export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
+export default function (props: LaunchProps<{ arguments: Args }>) {
   const [text, setText] = useState(props.arguments.queryText);
   const [searchText, setSearchText] = useState(text);
   const [data, setData] = useState<string[]>([""]);

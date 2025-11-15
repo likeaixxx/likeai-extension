@@ -1,9 +1,9 @@
 import { Action, ActionPanel, Icon, LaunchProps, List, getSelectedText } from "@raycast/api";
 import * as changeCase from "change-case";
 import { useEffect, useState } from "react";
-import { EasydictArguments, toTitleCase } from "./Arguments";
+import { Args, toTitleCase } from "./Args";
 
-export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
+export default function (props: LaunchProps<{ arguments: Args }>) {
   const [text, setText] = useState(props.arguments.queryText || "");
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
 }
 
 function caseTo(text: string): Map<string, string> {
-  let map = new Map();
+  const map = new Map();
   map.set(
     "config constant",
     `private static final String ${changeCase.constantCase(text)} = "${changeCase.dotCase(text)}";`,

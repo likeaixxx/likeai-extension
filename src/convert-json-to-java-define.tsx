@@ -1,9 +1,9 @@
 import { Action, ActionPanel, Detail, LaunchProps, getSelectedText } from "@raycast/api";
 import { camelCase } from "change-case";
 import { useEffect, useState } from "react";
-import { EasydictArguments } from "./Arguments";
+import { Args } from "./Args";
 
-export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
+export default function (props: LaunchProps<{ arguments: Args }>) {
   const className: string = props.arguments.queryText || "";
   const [data, setData] = useState(["", ""]),
     [loading, setLoading] = useState(true),
@@ -70,7 +70,7 @@ function generateJavaClassDefinition(json: unknown): string {
   const o: string[] = [];
 
   for (const key in json) {
-    if (json.hasOwnProperty(key)) {
+    if (Object.hasOwn(json, key)) {
       const dataType = typeof json[key];
       let javaType = "";
 
@@ -86,7 +86,7 @@ function generateJavaClassDefinition(json: unknown): string {
           break;
         case "object":
           if (Array.isArray(json[key])) {
-            let p = key.charAt(0).toUpperCase() + key.slice(1);
+            const p = key.charAt(0).toUpperCase() + key.slice(1);
             javaType = `List<${p}>`; // Assuming JSON array representation as List
             l.push(key);
           } else {

@@ -15,9 +15,7 @@ export default async function () {
       return;
     }
     open(
-      encodeURI(
-        `raycast://extensions/like-ai/likeai-extension/show-markdown?arguments={"queryText":"${storeage}", "sub":""}`,
-      ),
+      `raycast://extensions/like-ai/likeai-extension/show-markdown?arguments={"queryText":"${encodeURIComponent(storeage)}", "sub":""}`,
     );
   }
 }

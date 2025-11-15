@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Detail, LaunchProps } from "@raycast/api";
-import { EasydictArguments } from "./Arguments";
+import { Args } from "./Args";
 
-export default function (props: LaunchProps<{ arguments: EasydictArguments }>) {
+export default function (props: LaunchProps<{ arguments: Args }>) {
   const { queryText, sub, ext } = props.arguments;
   return (
     <Detail

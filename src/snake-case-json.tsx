@@ -55,7 +55,7 @@ function keysToSnakeCase(obj: unknown): ValueTypes {
 
   const recordObj = obj as Record<string, unknown>;
 
-  return Object.keys(recordObj).reduce((result: any, key: any) => {
+  return Object.keys(recordObj).reduce((result, key) => {
     result[toSnakeCase(key)] = keysToSnakeCase(recordObj[key]);
     return result;
   }, {} as RecursiveObject);
