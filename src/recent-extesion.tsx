@@ -99,7 +99,7 @@ export default function Command() {
           actions={
             <ActionPanel>
               <Action.OpenInBrowser title="Open on Raycast Store" url={item.store_url} />
-              <Action.OpenInBrowser title="Open on Github" url={item.source_url} />
+              <Action.OpenInBrowser title="Open on GitHub" url={item.source_url} />
             </ActionPanel>
           }
         />

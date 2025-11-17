@@ -28,7 +28,7 @@ export default function () {
         formated && (
           <ActionPanel>
             <Action.Paste content={data} />
-            <Action.CopyToClipboard content={data} title="Copy Formated Json" />
+            <Action.CopyToClipboard content={data} title="Copy Formated JSON" />
           </ActionPanel>
         )
       }
@@ -37,8 +37,6 @@ export default function () {
 }
 
 type ValueTypes = string | number | boolean | undefined | Record<string, unknown> | Array<unknown>;
-
-interface RecursiveObject extends Record<string, ValueTypes> {}
 
 function toSnakeCase(str: string): string {
   return str.replace(/\.?([A-Z]+)/g, (_, y) => "_" + y.toLowerCase()).replace(/^_/, "");
@@ -55,8 +53,11 @@ function keysToSnakeCase(obj: unknown): ValueTypes {
 
   const recordObj = obj as Record<string, unknown>;
 
-  return Object.keys(recordObj).reduce((result, key) => {
-    result[toSnakeCase(key)] = keysToSnakeCase(recordObj[key]);
-    return result;
-  }, {} as RecursiveObject);
+  return Object.keys(recordObj).reduce(
+    (result, key) => {
+      result[toSnakeCase(key)] = keysToSnakeCase(recordObj[key]);
+      return result;
+    },
+    {} as Record<string, ValueTypes>,
+  );
 }

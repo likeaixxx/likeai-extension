@@ -64,7 +64,7 @@ function javaClassDefinition(json: unknown, className = "Mock", isStatic = false
   return [properties, classDefinition];
 }
 
-function generateJavaClassDefinition(json: unknown): string {
+function generateJavaClassDefinition(json: any): string {
   let properties = "";
   const l: string[] = [];
   const o: string[] = [];

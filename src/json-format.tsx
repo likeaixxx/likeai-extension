@@ -33,8 +33,8 @@ export default function () {
         formated && (
           <ActionPanel>
             <Action.Paste content={formatedData} />
-            <Action.CopyToClipboard content={formatedData} title="Copy Formated Json" />
-            <Action.CopyToClipboard content={flatData} title="Copy Json" />
+            <Action.CopyToClipboard content={formatedData} title="Copy Formated JSON" />
+            <Action.CopyToClipboard content={flatData} title="Copy JSON" />
           </ActionPanel>
         )
       }

@@ -14,6 +14,7 @@ export default function (props: LaunchProps<{ arguments: Args }>) {
           selectedText = await getSelectedText();
         } catch (ignore) {
           // pass
+          console.log(ignore);
         }
         setText(selectedText);
       }

@@ -96,6 +96,7 @@ function Parse(props: { time: string }) {
       }
     }
   } catch (error) {
+    console.log(error);
     return Exp(`${props.time} is not a valid date or timestamp`);
   }
 }
