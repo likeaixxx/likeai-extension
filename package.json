@@ -1,228 +1,263 @@
 {
-  "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "likeai-extension",
-  "title": "Likeai Extension",
-  "description": "Be Best Likeai Extension",
-  "icon": "g.png",
-  "author": "likeai--",
-  "owner": "like-ai",
-  "categories": [
-    "Developer Tools"
-  ],
-  "license": "MIT",
-  "preferences": [
-    {
-      "name": "lyrics_api",
-      "title": "Lyrics Api Endpoint",
-      "description": "Lyrics Api Endpoint",
-      "placeholder": "http://127.0.0.1:8331",
-      "type": "textfield",
-      "required": false
-    }
-  ],
-  "commands": [
-    {
-      "name": "time-utils",
-      "title": "Convertor Time",
-      "description": "Convertor Time",
-      "mode": "view",
-      "arguments": [
-        {
-          "name": "queryText",
-          "placeholder": "Query",
-          "type": "text",
-          "required": false
-        }
-      ]
-    },
-    {
-      "name": "convert-ddl2-java",
-      "title": "Convert ddl to java model",
-      "description": "Convert ddl to java model",
-      "mode": "view"
-    },
-    {
-      "name": "format-text",
-      "title": "Format Text",
-      "description": "Format Text To Custom",
-      "mode": "view",
-      "arguments": [
-        {
-          "name": "queryText",
-          "placeholder": "text source...",
-          "type": "text",
-          "required": false
-        }
-      ]
-    },
-    {
-      "name": "convert-json-to-java-define",
-      "title": "Convert json to java definition",
-      "description": "Convert json to java definition",
-      "mode": "view",
-      "arguments": [
-        {
-          "name": "queryText",
-          "placeholder": "class name... default Mock",
-          "type": "text",
-          "required": false
-        }
-      ]
-    },
-    {
-      "name": "change-case",
-      "title": "Change selected text case",
-      "description": "Change selected text case",
-      "mode": "view",
-      "arguments": [
-        {
-          "name": "queryText",
-          "placeholder": "source string...",
-          "type": "text",
-          "required": false
-        }
-      ]
-    },
-    {
-      "name": "json-format",
-      "title": "Format Json",
-      "description": "Format json and flattening json",
-      "mode": "view"
-    },
-    {
-      "name": "mock-json",
-      "title": "Convert JAVA class definition into mock json",
-      "description": "Convert JAVA class definition into mock json",
-      "mode": "view"
-    },
-    {
-      "name": "hitokoto",
-      "title": "一言 ·",
-      "description": "hitokoto · 一言",
-      "mode": "no-view",
-      "interval": "24h",
-      "icon": "h.png"
-    },
-    {
-      "name": "show-markdown",
-      "title": "Just Show Query Markdown",
-      "description": "Just Show Query Markdown",
-      "mode": "view",
-      "arguments": [
-        {
-          "name": "queryText",
-          "placeholder": "TITLE",
-          "type": "text",
-          "required": true
-        },
-        {
-          "name": "sub",
-          "placeholder": "SUB TITLE",
-          "type": "text",
-          "required": false
-        }
-      ]
-    },
-    {
-      "name": "show-img",
-      "title": "Just Show Img With Markdown",
-      "description": "Just Show Img With Markdown",
-      "mode": "view",
-      "arguments": [
-        {
-          "name": "queryText",
-          "placeholder": "TITLE",
-          "type": "text",
-          "required": true
-        },
-        {
-          "name": "sub",
-          "placeholder": "SUB TITLE",
-          "type": "text",
-          "required": false
-        },
-        {
-          "name": "ext",
-          "placeholder": "EXT",
-          "type": "text",
-          "required": false
-        }
-      ]
-    },
-    {
-      "name": "snake-case-json",
-      "title": "Snake Case Json Key",
-      "description": "Snake Case Json Key",
-      "mode": "view"
-    },
-    {
-      "name": "ocr-translate",
-      "title": "Ocr Translate",
-      "description": "Translate Ocr Text",
-      "mode": "no-view"
-    },
-    {
-      "name": "translate-select",
-      "title": "Translate Selected",
-      "description": "Translate Selected Text",
-      "mode": "no-view"
-    },
-    {
-      "name": "recent-extesion",
-      "title": "Store Recent Extesion",
-      "description": "Recent Extesion From Raycast Store",
-      "mode": "view"
-    },
-    {
-      "name": "findLyrics",
-      "title": "Find Lyrics",
-      "subtitle": "Lyrics Api",
-      "description": "Find and display lyrics for the currently playing song.",
-      "mode": "view",
-      "icon": "spotify.png",
-      "arguments": [
-        {
-          "name": "refresh",
-          "data": [
-            {
-              "title": "True",
-              "value": "true"
-            },
-            {
-              "title": "False",
-              "value": "false"
-            }
-          ],
-          "type": "dropdown",
-          "placeholder": "Refresh"
-        }
-      ]
-    }
-  ],
-  "dependencies": {
-    "@raycast/api": "^1.103.6",
-    "@raycast/utils": "^1.17.0",
-    "change-case": "^4.1.2",
-    "dayjs": "^1.11.8",
-    "execa": "^9.3.0",
-    "node-fetch": "^3.3.1",
-    "sql-ddl-to-json-schema": "^4.0.9",
-    "sql-parser": "^0.5.0"
+ "$schema": "https://www.raycast.com/schemas/extension.json",
+ "name": "likeai-extension",
+ "title": "Likeai Extension",
+ "description": "Be Best Likeai Extension",
+ "icon": "g.png",
+ "author": "likeai--",
+ "owner": "like-ai",
+ "categories": [
+  "Developer Tools"
+ ],
+ "license": "MIT",
+ "preferences": [
+  {
+   "name": "lyrics_api",
+   "title": "Lyrics Api Endpoint",
+   "description": "Lyrics Api Endpoint",
+   "placeholder": "http://127.0.0.1:8331",
+   "type": "textfield",
+   "required": false
   },
-  "devDependencies": {
-    "@raycast/eslint-config": "^2.0.4",
-    "@types/node": "22.13.10",
-    "@types/react": "19.0.10",
-    "eslint": "^9.22.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
-  },
-  "scripts": {
-    "build": "ray build -e dist",
-    "dev": "ray develop",
-    "fix-lint": "ray lint --fix",
-    "lint": "ray lint",
-    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
-    "publish": "npx @raycast/api@latest publish"
+  {
+   "name": "weather_location",
+   "title": "Weather Location",
+   "description": "City name or location (e.g. Shanghai). Leave empty for auto-detection.",
+   "placeholder": "Shanghai",
+   "type": "textfield",
+   "required": false
   }
+ ],
+ "commands": [
+  {
+   "name": "time-utils",
+   "title": "Time Utils",
+   "description": "Convertor Time",
+   "mode": "view",
+   "arguments": [
+    {
+     "name": "queryText",
+     "placeholder": "Query",
+     "type": "text",
+     "required": false
+    }
+   ],
+   "icon": "🕛"
+  },
+  {
+   "name": "convert-ddl2-java",
+   "title": "DDL To Java",
+   "description": "Make Java Model From DDL",
+   "mode": "view",
+   "icon": "🐬"
+  },
+  {
+   "name": "txt-file-preview",
+   "title": "File Preview",
+   "description": "Preview File In Raycast And Format To Markdown",
+   "mode": "view",
+   "icon": "🔍"
+  },
+  {
+   "name": "format-text",
+   "title": "Text Formatter",
+   "description": "Format some text",
+   "mode": "view",
+   "icon": "✍️",
+   "arguments": [
+    {
+     "name": "queryText",
+     "placeholder": "input text...",
+     "type": "text",
+     "required": false
+    }
+   ]
+  },
+  {
+   "name": "convert-json-to-java-define",
+   "title": "Json To Java",
+   "description": "Convert json to java definition class",
+   "mode": "view",
+   "icon": "☕",
+   "arguments": [
+    {
+     "name": "queryText",
+     "placeholder": "Set Java Class Name",
+     "type": "text",
+     "required": false
+    }
+   ]
+  },
+  {
+   "name": "change-case",
+   "title": "Change Case",
+   "description": "Change selected text case or input text case",
+   "mode": "view",
+   "icon": "🔠",
+   "arguments": [
+    {
+     "name": "queryText",
+     "placeholder": "input text...",
+     "type": "text",
+     "required": false
+    }
+   ]
+  },
+  {
+   "name": "json-format",
+   "title": "Json Formatter",
+   "description": "Format Json And Flattening Json",
+   "mode": "view",
+   "icon": "🔍"
+  },
+  {
+   "name": "mock-json",
+   "title": "Mock Json",
+   "description": "Convert JAVA Class Definition Into Mock Json",
+   "mode": "view",
+   "icon": "⌛"
+  },
+  {
+   "name": "hitokoto",
+   "title": "一言 ·",
+   "description": "hitokoto · 一言",
+   "mode": "no-view",
+   "interval": "24h",
+   "icon": "💬"
+  },
+  {
+   "name": "show-markdown",
+   "title": "Show Markdown",
+   "description": "Show Markdown",
+   "mode": "view",
+   "arguments": [
+    {
+     "name": "queryText",
+     "placeholder": "TITLE",
+     "type": "text",
+     "required": true
+    },
+    {
+     "name": "sub",
+     "placeholder": "SUB TITLE",
+     "type": "text",
+     "required": false
+    }
+   ],
+   "icon": "📝"
+  },
+  {
+   "name": "show-img",
+   "title": "Show Img",
+   "description": "Show Img In Markdown",
+   "mode": "view",
+   "arguments": [
+    {
+     "name": "queryText",
+     "placeholder": "image name",
+     "type": "text",
+     "required": true
+    },
+    {
+     "name": "sub",
+     "placeholder": "image url",
+     "type": "text",
+     "required": false
+    },
+    {
+     "name": "ext",
+     "placeholder": "extra info",
+     "type": "text",
+     "required": false
+    }
+   ],
+   "icon": "🌌"
+  },
+  {
+   "name": "snake-case-json",
+   "title": "Snake Case Json",
+   "description": "Change Json Key To Snake Case",
+   "mode": "view",
+   "icon": "🐍"
+  },
+  {
+   "name": "ocr-translate",
+   "title": "Ocr Translate",
+   "description": "Translate Ocr Text",
+   "mode": "no-view",
+   "icon": "🧠"
+  },
+  {
+   "name": "translate-select",
+   "title": "Translate",
+   "description": "Translate Selected Text",
+   "mode": "no-view",
+   "icon": "🌍"
+  },
+  {
+   "name": "recent-extesion",
+   "title": "Recent Raycast Extension",
+   "description": "Recent Raycast Extension",
+   "mode": "view",
+   "icon": "🎈"
+  },
+  {
+   "name": "findLyrics",
+   "title": "Lyrics",
+   "description": "Find and display lyrics for the currently playing song.",
+   "mode": "view",
+   "icon": "spotify.png",
+   "arguments": [
+    {
+     "name": "refresh",
+     "data": [
+      {
+       "title": "True",
+       "value": "true"
+      },
+      {
+       "title": "False",
+       "value": "false"
+      }
+     ],
+     "type": "dropdown",
+     "placeholder": "Refresh"
+    }
+   ]
+  },
+  {
+   "name": "weather",
+   "title": "天气",
+   "description": "Show current weather in command bar",
+   "mode": "no-view",
+   "interval": "10m",
+   "icon": "🌤️"
+  }
+ ],
+ "dependencies": {
+  "@raycast/api": "^1.103.6",
+  "@raycast/utils": "^1.17.0",
+  "change-case": "^4.1.2",
+  "dayjs": "^1.11.8",
+  "execa": "^9.3.0",
+  "node-fetch": "^3.3.1",
+  "sql-ddl-to-json-schema": "^4.0.9",
+  "sql-parser": "^0.5.0"
+ },
+ "devDependencies": {
+  "@raycast/eslint-config": "^2.0.4",
+  "@types/node": "22.13.10",
+  "@types/react": "19.0.10",
+  "eslint": "^9.22.0",
+  "prettier": "^3.5.3",
+  "typescript": "^5.8.2"
+ },
+ "scripts": {
+  "build": "ray build -e dist",
+  "dev": "ray develop",
+  "fix-lint": "ray lint --fix",
+  "lint": "ray lint",
+  "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+  "publish": "npx @raycast/api@latest publish"
+ }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { execSync } from "child_process";
-import { confirm as conformApi, lyrics as getLyricsApi, LyricResponseItem } from "./helper/lyricsApi";
+import { confirm as conformApi, lyrics as getLyricsApi, LyricResponseItem } from "./helper/lyrics-api";
 import {
   getPreferenceValues,
   showHUD,

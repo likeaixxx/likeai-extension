@@ -88,16 +88,16 @@ function extractClassFields(classBody: string): Array<{ name: string; type: stri
     if (!isInMethod) {
       const comment = fieldMatch[1]
         ? fieldMatch[1]
-            .split("\n")
-            .map((line) =>
-              line
-                .trim()
-                .replace(/^\*\s*/, "")
-                .trim(),
-            )
-            .filter((line) => line && !line.startsWith("@"))
-            .join(" ")
-            .trim()
+          .split("\n")
+          .map((line) =>
+            line
+              .trim()
+              .replace(/^\*\s*/, "")
+              .trim(),
+          )
+          .filter((line) => line && !line.startsWith("@"))
+          .join(" ")
+          .trim()
         : "";
 
       const type = fieldMatch[2].trim();
