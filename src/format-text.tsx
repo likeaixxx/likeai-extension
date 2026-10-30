@@ -1,4 +1,4 @@
-import { Action, ActionPanel, LaunchProps, List, getSelectedText } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, LaunchProps, List, closeMainWindow, showHUD } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { Args } from "./Args";
 
@@ -10,7 +10,7 @@ export default function (props: LaunchProps<{ arguments: Args }>) {
   useEffect(() => {
     async function loadSelectedText() {
       if (!props.arguments.queryText) {
-        const selectedText = await getSelectedText();
+        const selectedText = await Clipboard.readText() || "";
         setText(selectedText);
         setSearchText(selectedText);
         fetchData(selectedText)
@@ -33,8 +33,10 @@ export default function (props: LaunchProps<{ arguments: Args }>) {
       .then((h) => {
         setData(h);
       })
-      .catch((error) => {
-        setData([error.stack]);
+      .catch(async (error) => {
+        console.error(`Failed! ${error.message}❗`);
+        await showHUD(`Failed! ${error.message}❗`);
+        await closeMainWindow();
       });
   }
 

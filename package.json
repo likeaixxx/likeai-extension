@@ -1,263 +1,207 @@
 {
- "$schema": "https://www.raycast.com/schemas/extension.json",
- "name": "likeai-extension",
- "title": "Likeai Extension",
- "description": "Be Best Likeai Extension",
- "icon": "g.png",
- "author": "likeai--",
- "owner": "like-ai",
- "categories": [
-  "Developer Tools"
- ],
- "license": "MIT",
- "preferences": [
-  {
-   "name": "lyrics_api",
-   "title": "Lyrics Api Endpoint",
-   "description": "Lyrics Api Endpoint",
-   "placeholder": "http://127.0.0.1:8331",
-   "type": "textfield",
-   "required": false
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "likeai-extension",
+  "title": "Likeai Extension",
+  "description": "Be Best Likeai Extension",
+  "icon": "g.png",
+  "author": "likeai--",
+  "owner": "like-ai",
+  "categories": [
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "preferences": [
+    {
+      "name": "lyrics_api",
+      "title": "Lyrics Api Endpoint",
+      "description": "Lyrics Api Endpoint",
+      "placeholder": "http://127.0.0.1:8331",
+      "type": "textfield",
+      "required": false
+    },
+    {
+      "name": "weather_location",
+      "title": "Weather Location",
+      "description": "City name or location (e.g. Shanghai). Leave empty for auto-detection.",
+      "placeholder": "BeiJing",
+      "type": "dropdown",
+      "data": [
+        {
+          "title": "北京",
+          "value": "BeiJing"
+        },
+        {
+          "title": "安康",
+          "value": "AnKang"
+        },
+        {
+          "title": "西安",
+          "value": "XiAn"
+        },
+        {
+          "title": "上海",
+          "value": "ShangHai"
+        },
+        {
+          "title": "玉溪",
+          "value": "YuXi"
+        }
+      ],
+      "required": false
+    },
+    {
+      "name": "move_distance",
+      "title": "Move Window Distance (pt)",
+      "description": "The distance in points (pt) to move the focused window for move commands",
+      "placeholder": "10",
+      "type": "textfield",
+      "required": false
+    }
+  ],
+  "commands": [
+    {
+      "name": "time-utils",
+      "title": "Time Utils",
+      "description": "Convertor Time",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "Query",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "icon": "🕛"
+    },
+    {
+      "name": "convert-ddl2-java",
+      "title": "DDL To Java",
+      "description": "Make Java Model From DDL",
+      "mode": "view",
+      "icon": "🐬"
+    },
+    {
+      "name": "txt-file-preview",
+      "title": "File Preview",
+      "description": "Preview File In Raycast And Format To Markdown",
+      "mode": "view",
+      "icon": "🔍"
+    },
+    {
+      "name": "format-text",
+      "title": "Text Formatter",
+      "description": "Format some text",
+      "mode": "view",
+      "icon": "✍️",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "input text...",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "convert-json-to-java-define",
+      "title": "Json To Java",
+      "description": "Convert json to java definition class",
+      "mode": "view",
+      "icon": "☕",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "Set Java Class Name",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "change-case",
+      "title": "Change Case",
+      "description": "Change selected text case or input text case",
+      "mode": "view",
+      "icon": "🔠",
+      "arguments": [
+        {
+          "name": "queryText",
+          "placeholder": "input text...",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "json-format",
+      "title": "Json Formatter",
+      "description": "Format Json And Flattening Json",
+      "mode": "view",
+      "icon": "🔍"
+    },
+    {
+      "name": "mock-json",
+      "title": "Mock Json",
+      "description": "Convert JAVA Class Definition Into Mock Json",
+      "mode": "view",
+      "icon": "⌛"
+    },
+    {
+      "name": "hitokoto",
+      "title": "一言 ·",
+      "description": "hitokoto · 一言",
+      "mode": "no-view",
+      "interval": "24h",
+      "icon": "💬"
+    },
+    {
+      "name": "snake-case-json",
+      "title": "Snake Case Json",
+      "description": "Change Json Key To Snake Case",
+      "mode": "view",
+      "icon": "🐍"
+    },
+    {
+      "name": "recent-extesion",
+      "title": "Recent Raycast Extension",
+      "description": "Recent Raycast Extension",
+      "mode": "view",
+      "icon": "🎈"
+    },
+    {
+      "name": "weather",
+      "title": "天气",
+      "description": "Show current weather in command bar",
+      "mode": "no-view",
+      "interval": "10m",
+      "icon": "🌤️"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.103.6",
+    "@raycast/utils": "^1.17.0",
+    "change-case": "^4.1.2",
+    "dayjs": "^1.11.8",
+    "execa": "^9.3.0",
+    "node-fetch": "^3.3.1",
+    "sql-ddl-to-json-schema": "^4.0.9",
+    "sql-parser": "^0.5.0"
   },
-  {
-   "name": "weather_location",
-   "title": "Weather Location",
-   "description": "City name or location (e.g. Shanghai). Leave empty for auto-detection.",
-   "placeholder": "Shanghai",
-   "type": "textfield",
-   "required": false
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
   }
- ],
- "commands": [
-  {
-   "name": "time-utils",
-   "title": "Time Utils",
-   "description": "Convertor Time",
-   "mode": "view",
-   "arguments": [
-    {
-     "name": "queryText",
-     "placeholder": "Query",
-     "type": "text",
-     "required": false
-    }
-   ],
-   "icon": "🕛"
-  },
-  {
-   "name": "convert-ddl2-java",
-   "title": "DDL To Java",
-   "description": "Make Java Model From DDL",
-   "mode": "view",
-   "icon": "🐬"
-  },
-  {
-   "name": "txt-file-preview",
-   "title": "File Preview",
-   "description": "Preview File In Raycast And Format To Markdown",
-   "mode": "view",
-   "icon": "🔍"
-  },
-  {
-   "name": "format-text",
-   "title": "Text Formatter",
-   "description": "Format some text",
-   "mode": "view",
-   "icon": "✍️",
-   "arguments": [
-    {
-     "name": "queryText",
-     "placeholder": "input text...",
-     "type": "text",
-     "required": false
-    }
-   ]
-  },
-  {
-   "name": "convert-json-to-java-define",
-   "title": "Json To Java",
-   "description": "Convert json to java definition class",
-   "mode": "view",
-   "icon": "☕",
-   "arguments": [
-    {
-     "name": "queryText",
-     "placeholder": "Set Java Class Name",
-     "type": "text",
-     "required": false
-    }
-   ]
-  },
-  {
-   "name": "change-case",
-   "title": "Change Case",
-   "description": "Change selected text case or input text case",
-   "mode": "view",
-   "icon": "🔠",
-   "arguments": [
-    {
-     "name": "queryText",
-     "placeholder": "input text...",
-     "type": "text",
-     "required": false
-    }
-   ]
-  },
-  {
-   "name": "json-format",
-   "title": "Json Formatter",
-   "description": "Format Json And Flattening Json",
-   "mode": "view",
-   "icon": "🔍"
-  },
-  {
-   "name": "mock-json",
-   "title": "Mock Json",
-   "description": "Convert JAVA Class Definition Into Mock Json",
-   "mode": "view",
-   "icon": "⌛"
-  },
-  {
-   "name": "hitokoto",
-   "title": "一言 ·",
-   "description": "hitokoto · 一言",
-   "mode": "no-view",
-   "interval": "24h",
-   "icon": "💬"
-  },
-  {
-   "name": "show-markdown",
-   "title": "Show Markdown",
-   "description": "Show Markdown",
-   "mode": "view",
-   "arguments": [
-    {
-     "name": "queryText",
-     "placeholder": "TITLE",
-     "type": "text",
-     "required": true
-    },
-    {
-     "name": "sub",
-     "placeholder": "SUB TITLE",
-     "type": "text",
-     "required": false
-    }
-   ],
-   "icon": "📝"
-  },
-  {
-   "name": "show-img",
-   "title": "Show Img",
-   "description": "Show Img In Markdown",
-   "mode": "view",
-   "arguments": [
-    {
-     "name": "queryText",
-     "placeholder": "image name",
-     "type": "text",
-     "required": true
-    },
-    {
-     "name": "sub",
-     "placeholder": "image url",
-     "type": "text",
-     "required": false
-    },
-    {
-     "name": "ext",
-     "placeholder": "extra info",
-     "type": "text",
-     "required": false
-    }
-   ],
-   "icon": "🌌"
-  },
-  {
-   "name": "snake-case-json",
-   "title": "Snake Case Json",
-   "description": "Change Json Key To Snake Case",
-   "mode": "view",
-   "icon": "🐍"
-  },
-  {
-   "name": "ocr-translate",
-   "title": "Ocr Translate",
-   "description": "Translate Ocr Text",
-   "mode": "no-view",
-   "icon": "🧠"
-  },
-  {
-   "name": "translate-select",
-   "title": "Translate",
-   "description": "Translate Selected Text",
-   "mode": "no-view",
-   "icon": "🌍"
-  },
-  {
-   "name": "recent-extesion",
-   "title": "Recent Raycast Extension",
-   "description": "Recent Raycast Extension",
-   "mode": "view",
-   "icon": "🎈"
-  },
-  {
-   "name": "findLyrics",
-   "title": "Lyrics",
-   "description": "Find and display lyrics for the currently playing song.",
-   "mode": "view",
-   "icon": "spotify.png",
-   "arguments": [
-    {
-     "name": "refresh",
-     "data": [
-      {
-       "title": "True",
-       "value": "true"
-      },
-      {
-       "title": "False",
-       "value": "false"
-      }
-     ],
-     "type": "dropdown",
-     "placeholder": "Refresh"
-    }
-   ]
-  },
-  {
-   "name": "weather",
-   "title": "天气",
-   "description": "Show current weather in command bar",
-   "mode": "no-view",
-   "interval": "10m",
-   "icon": "🌤️"
-  }
- ],
- "dependencies": {
-  "@raycast/api": "^1.103.6",
-  "@raycast/utils": "^1.17.0",
-  "change-case": "^4.1.2",
-  "dayjs": "^1.11.8",
-  "execa": "^9.3.0",
-  "node-fetch": "^3.3.1",
-  "sql-ddl-to-json-schema": "^4.0.9",
-  "sql-parser": "^0.5.0"
- },
- "devDependencies": {
-  "@raycast/eslint-config": "^2.0.4",
-  "@types/node": "22.13.10",
-  "@types/react": "19.0.10",
-  "eslint": "^9.22.0",
-  "prettier": "^3.5.3",
-  "typescript": "^5.8.2"
- },
- "scripts": {
-  "build": "ray build -e dist",
-  "dev": "ray develop",
-  "fix-lint": "ray lint --fix",
-  "lint": "ray lint",
-  "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
-  "publish": "npx @raycast/api@latest publish"
- }
 }

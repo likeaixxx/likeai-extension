@@ -62,7 +62,7 @@ async function getSongInfo() {
 }
 
 // Component to show lyrics for the currently playing song
-export default function (props: LaunchProps<{ arguments: Arguments.Refresh }>) {
+export default function (props: LaunchProps<{ arguments: Arguments.FindLyrics }>) {
   const [lyrics, setLyrics] = useState<LyricResponseItem[]>([]);
   const [songInfo, setSongInfo] = useState<{ title: string; artist: string; album?: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);

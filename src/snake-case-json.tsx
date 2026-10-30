@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Detail, getSelectedText } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, closeMainWindow, Detail, showHUD } from "@raycast/api";
 import { useEffect, useState } from "react";
 
 export default function () {
@@ -7,15 +7,19 @@ export default function () {
   const [formated, setFormated] = useState(false);
 
   useEffect(() => {
-    getSelectedText()
+    Clipboard.readText()
       .then((h) => {
+        if (h === undefined) {
+          throw Error("undefined")
+        }
         setData(JSON.stringify(keysToSnakeCase(JSON.parse(h)), null, "\t"));
         setLoading(false);
         setFormated(true);
       })
-      .catch((error) => {
-        setData(error.stack);
-        setLoading(false);
+      .catch(async (error) => {
+        console.error(`Failed! ${error.message}❗`);
+        await showHUD(`Failed! ${error.message}❗`);
+        await closeMainWindow();
       });
   }, []);
 

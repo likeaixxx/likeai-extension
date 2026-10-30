@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Detail, LaunchProps, getSelectedText } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail, LaunchProps } from "@raycast/api";
 import { camelCase } from "change-case";
 import { useEffect, useState } from "react";
 import { Args } from "./Args";
@@ -44,7 +44,7 @@ export default function (props: LaunchProps<{ arguments: Args }>) {
 }
 
 async function convert(className: string): Promise<string[]> {
-  const selected = await getSelectedText();
+  const selected = await Clipboard.readText() || "";
   return new Promise((resolve, reject) => {
     try {
       let de = javaClassDefinition(JSON.parse(selected), className);

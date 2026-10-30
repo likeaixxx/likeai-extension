@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Detail, getSelectedText } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, closeMainWindow, Detail, showHUD } from "@raycast/api";
 import { useEffect, useState } from "react";
 
 /**
@@ -7,35 +7,30 @@ import { useEffect, useState } from "react";
  * @returns A formatted JSON string representing the class fields
  */
 function javaClassToMockJson(javaClassString: string): string {
-  try {
-    // Extract the main class name and body
-    const classMatch = javaClassString.match(
-      /(?:public|private|protected)?\s+(?:final\s+)?class\s+(\w+)(?:<[^>]+>)?(?:\s+extends\s+[\w<>.]+)?(?:\s+implements\s+[\w<>.,\s]+)?\s*\{([\s\S]*)/,
-    );
+  // Extract the main class name and body
+  const classMatch = javaClassString.match(
+    /(?:public|private|protected)?\s+(?:final\s+)?class\s+(\w+)(?:<[^>]+>)?(?:\s+extends\s+[\w<>.]+)?(?:\s+implements\s+[\w<>.,\s]+)?\s*\{([\s\S]*)/,
+  );
 
-    if (!classMatch) {
-      return JSON.stringify({ error: "No class definition found" });
-    }
-
-    const classBody = classMatch[2];
-
-    // Extract fields directly from the class body
-    const fields = extractClassFields(classBody);
-
-    // Format the result
-    const result = {};
-
-    for (const field of fields) {
-      // Remove modifiers from type
-      const cleanType = field.type.replace(/(?:private|public|protected|final|static)\s+/g, "");
-      result[field.name] = cleanType + (field.comment ? `, ${field.comment}` : "");
-    }
-
-    return JSON.stringify(result, null, 2);
-  } catch (error) {
-    console.error("Error in javaClassToMockJson:", error);
-    return JSON.stringify({ error: "Failed to parse Java class" }, null, 2);
+  if (!classMatch) {
+    throw Error("No class definition found");
   }
+
+  const classBody = classMatch[2];
+
+  // Extract fields directly from the class body
+  const fields = extractClassFields(classBody);
+
+  // Format the result
+  const result: Record<string, string> = {};
+
+  for (const field of fields) {
+    // Remove modifiers from type
+    const cleanType = field.type.replace(/(?:private|public|protected|final|static)\s+/g, "");
+    result[field.name] = cleanType + (field.comment ? `, ${field.comment}` : "");
+  }
+
+  return JSON.stringify(result, null, 2);
 }
 
 /**
@@ -88,16 +83,16 @@ function extractClassFields(classBody: string): Array<{ name: string; type: stri
     if (!isInMethod) {
       const comment = fieldMatch[1]
         ? fieldMatch[1]
-          .split("\n")
-          .map((line) =>
-            line
-              .trim()
-              .replace(/^\*\s*/, "")
-              .trim(),
-          )
-          .filter((line) => line && !line.startsWith("@"))
-          .join(" ")
-          .trim()
+            .split("\n")
+            .map((line) =>
+              line
+                .trim()
+                .replace(/^\*\s*/, "")
+                .trim(),
+            )
+            .filter((line) => line && !line.startsWith("@"))
+            .join(" ")
+            .trim()
         : "";
 
       const type = fieldMatch[2].trim();
@@ -120,28 +115,14 @@ function extractClassFields(classBody: string): Array<{ name: string; type: stri
  * @returns JSON string representation
  */
 function processJavaClass(input: string): string {
-  try {
-    if (!input || !input.includes("class")) {
-      return JSON.stringify({ error: "Input does not appear to be a valid Java class" });
-    }
-
-    return javaClassToMockJson(input);
-  } catch (error) {
-    console.error("Error processing Java class:", error);
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    return JSON.stringify(
-      {
-        error: "Failed to process Java class",
-        message: errorMessage,
-      },
-      null,
-      2,
-    );
+  if (!input || !input.includes("class")) {
+    throw Error("Input does not appear to be a valid Java class")
   }
+  return javaClassToMockJson(input);
 }
 
 async function model2Json(): Promise<string> {
-  const classMata = await getSelectedText();
+  const classMata = await Clipboard.readText() || "";
   return new Promise((resolve, reject) => {
     try {
       resolve(processJavaClass(classMata));
@@ -164,9 +145,10 @@ export default function () {
         setLoading(false);
         setFormated(true);
       })
-      .catch((error) => {
-        setData(error.stack);
-        setLoading(false);
+      .catch(async (error) => {
+        console.error(`Failed! ${error.message}❗`);
+        await showHUD(`Failed! ${error.message}❗`);
+        await closeMainWindow();
       });
   }, []);
 
